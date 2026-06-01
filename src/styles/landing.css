@@ -417,21 +417,21 @@
 .auth2-bg-layer {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: auto 100%;
   background-position: 0% center;
   background-repeat: no-repeat;
-  animation: auth-bg-pan 18s linear infinite;
+  animation: auth-bg-pan 6s linear infinite;
   z-index: 0;
   border-radius: inherit;
 }
 .auth2-bg-layer--2 {
-  animation-delay: -9s;
+  animation-delay: -3s;
 }
 
 @keyframes auth-bg-pan {
   0%   { background-position: 0% center;   opacity: 0; }
-  8%   { opacity: 1; }
-  88%  { opacity: 1; }
+  5%   { opacity: 1; }
+  90%  { opacity: 1; }
   100% { background-position: 100% center; opacity: 0; }
 }
 
