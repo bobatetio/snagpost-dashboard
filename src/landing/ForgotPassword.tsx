@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { AuthMarquee } from "./AuthPage";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -78,11 +79,7 @@ export function ForgotPassword() {
             <img src={`${BASE}/hero-panel.jpg`} alt="SnagPost dashboard" className="auth2-mockup" />
           </div>
         </div>
-        <div className="auth2-brands">
-          {["TokScript", "Facebook", "Chrome", "Claude AI", "ChatGPT"].map(b => (
-            <span key={b} className="auth2-brand">{b}</span>
-          ))}
-        </div>
+        <AuthMarquee />
       </div>
     </div>
   );

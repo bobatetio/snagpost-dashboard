@@ -141,11 +141,7 @@ export function AuthPage({ mode }: AuthPageProps) {
             />
           </div>
         </div>
-        <div className="auth2-brands">
-          {["TokScript", "Facebook", "Chrome", "Claude AI", "ChatGPT"].map(b => (
-            <span key={b} className="auth2-brand">{b}</span>
-          ))}
-        </div>
+        <AuthMarquee />
       </div>
     </div>
   );
@@ -195,5 +191,57 @@ function EyeOffIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
     </svg>
+  );
+}
+
+/* ── Scrolling data-point marquee (mirrors the landing page "What you get" section) ── */
+function ChipIcon({ d, d2 }: { d: string; d2?: string }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d={d} />{d2 && <path d={d2} />}
+    </svg>
+  );
+}
+
+const ROW1 = [
+  { icon: <ChipIcon d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />, label: "Likes" },
+  { icon: <ChipIcon d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, label: "Comments" },
+  { icon: <ChipIcon d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />, label: "Shares" },
+  { icon: <ChipIcon d="M5 3l14 9-14 9V3z" />, label: "Video plays" },
+  { icon: <ChipIcon d="M3 3h18v18H3zM3 9h18M9 21V9" />, label: "Post type" },
+  { icon: <ChipIcon d="M17 10H3M21 6H3M21 14H3M13 18H3" />, label: "Caption text" },
+  { icon: <ChipIcon d="M3 4h18v18H3zM16 2v4M8 2v4M3 10h18" />, label: "Date posted" },
+  { icon: <ChipIcon d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" d2="M12 6v6l4 2" />, label: "Time posted" },
+];
+
+const ROW2 = [
+  { icon: <ChipIcon d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />, label: "Followers" },
+  { icon: <ChipIcon d="M21 5c0 1.657-4.03 3-9 3S3 6.657 3 5m18 0c0-1.657-4.03-3-9-3S3 3.343 3 5m18 0v14c0 1.657-4.03 3-9 3s-9-1.343-9-3V5" />, label: "Total posts" },
+  { icon: <ChipIcon d="M18 20V10M12 20V4M6 20v-6" />, label: "Posts by day" },
+  { icon: <ChipIcon d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z" />, label: "Content breakdown" },
+  { icon: <ChipIcon d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />, label: "Top post types" },
+  { icon: <ChipIcon d="M23 6L13.5 15.5l-5-5L1 18M17 6h6v6" />, label: "Avg engagement" },
+  { icon: <ChipIcon d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />, label: "Outlier posts" },
+  { icon: <ChipIcon d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12M12 2a6 6 0 1 0 0 12A6 6 0 0 0 12 2z" />, label: "Top content" },
+];
+
+export function AuthMarquee() {
+  const makeChips = (items: typeof ROW1) =>
+    [...items, ...items].map((item, i) => (
+      <div key={i} className="auth2-chip">
+        <span className="auth2-chip-icon">{item.icon}</span>
+        <span className="auth2-chip-label">{item.label}</span>
+      </div>
+    ));
+
+  return (
+    <div className="auth2-marquee-wrap">
+      <div className="auth2-marquee-row">
+        <div className="auth2-marquee-track auth2-marquee-track--left">{makeChips(ROW1)}</div>
+      </div>
+      <div className="auth2-marquee-row">
+        <div className="auth2-marquee-track auth2-marquee-track--right">{makeChips(ROW2)}</div>
+      </div>
+    </div>
   );
 }

@@ -396,10 +396,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 56px 48px 40px;
+  padding: 48px 40px 48px 48px;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
+  gap: 32px;
 }
 .auth2-right::before {
   content: "";
@@ -412,25 +413,29 @@
 }
 .auth2-right-content { position: relative; }
 .auth2-right-title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
   color: #fff;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   margin: 0 0 12px;
-  max-width: 440px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .auth2-right-sub {
-  font-size: 14.5px;
+  font-size: 14px;
   color: rgba(255,255,255,0.65);
   line-height: 1.6;
   max-width: 380px;
-  margin: 0 0 32px;
+  margin: 0 0 28px;
 }
 .auth2-mockup-wrap {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.20);
+  margin-right: 0;
 }
 .auth2-mockup {
   width: 100%;
@@ -438,16 +443,58 @@
   display: block;
 }
 
-/* Brand strip */
-.auth2-brands {
+/* Scrolling data-point chips strip */
+.auth2-marquee-wrap {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 28px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 4px;
 }
+.auth2-marquee-row {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.auth2-marquee-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+}
+.auth2-marquee-track--left  { animation: auth-marquee-left  32s linear infinite; }
+.auth2-marquee-track--right { animation: auth-marquee-right 32s linear infinite; }
+
+@keyframes auth-marquee-left  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes auth-marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+.auth2-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.auth2-chip-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.auth2-chip-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.90);
+}
+
+/* kept for TS — no longer used */
 .auth2-brand {
   font-size: 13px;
   font-weight: 600;
