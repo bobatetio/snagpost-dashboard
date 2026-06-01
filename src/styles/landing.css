@@ -488,15 +488,15 @@
   display: block;
 }
 
-/* Lottie — fixed to bottom-right, flush with panel edges */
+/* Lottie — flush bottom-right of panel, compensate for panel padding */
 .auth2-lottie-wrap {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 82%;
+  bottom: -48px;
+  right: -48px;
+  width: 78%;
   z-index: 2;
-  border-radius: 24px 0 24px 0;
   overflow: hidden;
+  border-radius: 16px 0 0 0;
 }
 
 /* Scrolling data-point chips strip */
