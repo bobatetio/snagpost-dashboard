@@ -425,12 +425,12 @@
   background-size: auto 100%;
   background-position: 0% center;
   background-repeat: no-repeat;
-  animation: auth-bg-pan 6s linear infinite;
+  animation: auth-bg-pan 20s linear infinite;
   z-index: 0;
   border-radius: inherit;
 }
 .auth2-bg-layer--2 {
-  animation-delay: -3s;
+  animation-delay: -10s;
 }
 
 @keyframes auth-bg-pan {
@@ -488,13 +488,12 @@
   display: block;
 }
 
-/* Lottie — bottom-right aligned, smaller */
+/* Lottie — centered, larger */
 .auth2-lottie-wrap {
-  position: absolute;
-  bottom: 32px;
-  right: 32px;
-  width: 58%;
+  position: relative;
   z-index: 2;
+  width: 88%;
+  margin: 0 auto;
   border-radius: 16px;
   overflow: hidden;
 }
