@@ -90,7 +90,8 @@ function Header() {
     const sectionIds = ["features", "how", "pricing", "faq"];
 
     const handleScroll = () => {
-      if (window.scrollY < 200) {
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      if (scrollY < 200) {
         setActiveHref("#");
         return;
       }
@@ -178,10 +179,11 @@ function Hero() {
     const MIN_WIDTH = 672; // max-w-2xl
     const MAX_WIDTH = 1152; // max-w-6xl
     let rafId: number | null = null;
+    const getScrollY = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const updateVideoWidth = () => {
       rafId = null;
       if (!videoRef.current) return;
-      const scrolled = window.scrollY;
+      const scrolled = getScrollY();
       const growOver = window.innerHeight * 0.6;
       const progress = Math.min(scrolled / growOver, 1);
       const width = MIN_WIDTH + (MAX_WIDTH - MIN_WIDTH) * progress;
@@ -192,10 +194,12 @@ function Hero() {
       rafId = requestAnimationFrame(updateVideoWidth);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
     updateVideoWidth();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("scroll", onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
@@ -415,15 +419,37 @@ function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string;
    SCROLL CARD WRAPPER
 ============================================================ */
 function ScrollCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0) scale(1)";
+          io.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "-40px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 48, scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={ref}
+      style={{
+        opacity: 0,
+        transform: "translateY(52px) scale(0.97)",
+        transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+        willChange: "opacity, transform",
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
