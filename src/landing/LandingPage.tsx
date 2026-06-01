@@ -401,11 +401,11 @@ function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string;
   }, [path]);
 
   return (
-    <div ref={ref} className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }}>
+    <div ref={ref} className={`${className} block`}>
       {data
-        ? <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "100%" }} />
+        ? <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block" }} />
         : fallbackImg
-          ? <img src={fallbackImg} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+          ? <img src={fallbackImg} alt="" style={{ width: "100%", height: "auto", display: "block" }} />
           : null}
     </div>
   );
@@ -508,7 +508,7 @@ function Features() {
                     {f.body}
                   </p>
                 </div>
-                <div className={`pl-6 md:pl-8 pt-6 md:pt-0 pr-10 flex items-center justify-center h-full ${i % 2 !== 0 ? "md:order-1" : ""}`} style={{ paddingTop: "6px", paddingBottom: "6px" }}>
+                <div className={`pl-6 md:pl-8 pt-6 md:pt-0 pr-10 flex items-center justify-center h-full ${i % 2 !== 0 ? "md:order-1" : ""}`}>
                   {"lottie" in f ? (
                     <LottieCard path={(f as any).lottie} fallbackImg={(f as any).img} className={(f as any).lottieClass} />
                   ) : (
@@ -1011,9 +1011,9 @@ function WhereItWorks() {
             </div>
           </div>
 
-          {/* Right column — Lottie */}
-          <div className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden self-stretch" style={{ padding: "3px" }}>
-            <LottieCard path={`${BASE}/Where it works.json`} className="w-full h-full object-cover" />
+          {/* Right column — Lottie (natural 541×609 ratio) */}
+          <div className="w-full md:w-[48%] shrink-0 rounded-[28px]">
+            <LottieCard path={`${BASE}/Where it works.json`} className="w-full" />
           </div>
 
         </div>
