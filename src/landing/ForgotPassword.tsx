@@ -72,8 +72,8 @@ export function ForgotPassword() {
 
       {/* ── Right panel ── */}
       <div className="auth2-right">
-        <div className="auth2-bg-layer" style={{ backgroundImage: `url('${BASE}/Image%20Content.png')` }} />
-        <div className="auth2-bg-layer auth2-bg-layer--2" style={{ backgroundImage: `url('${BASE}/Image%20Content.png')` }} />
+        <div className="auth2-bg-layer" style={{ backgroundImage: `url('${BASE}/image-content.png')` }} />
+        <div className="auth2-bg-layer auth2-bg-layer--2" style={{ backgroundImage: `url('${BASE}/image-content.png')` }} />
         <div className="auth2-right-content">
           <h2 className="auth2-right-title">The smartest way to research<br />Facebook creators</h2>
           <p className="auth2-right-sub">Capture every post, like, and share from any profile — straight to a dashboard you can study.</p>
