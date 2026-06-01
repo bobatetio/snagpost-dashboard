@@ -968,7 +968,7 @@ function WhereItWorks() {
   return (
     <section className="py-20 bg-white">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="flex flex-col md:flex-row gap-12 items-stretch">
+        <div className="flex flex-col md:flex-row gap-12 items-start">
 
           {/* Left column */}
           <div className="flex-1 flex flex-col">
