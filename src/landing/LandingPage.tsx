@@ -6,6 +6,33 @@ import Lottie from "lottie-react";
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function LandingPage() {
+  // Fix: app.css sets overflow-x:hidden on html/body/#root which the CSS spec
+  // converts to overflow-y:auto, making #root the scroll container instead of
+  // window. Override on mount so window.scrollY and scroll events work correctly.
+  useEffect(() => {
+    const root = document.getElementById("root");
+    const prev = {
+      htmlX: document.documentElement.style.overflowX,
+      htmlY: document.documentElement.style.overflowY,
+      bodyX: document.body.style.overflowX,
+      bodyY: document.body.style.overflowY,
+      rootX: root?.style.overflowX ?? "",
+      rootY: root?.style.overflowY ?? "",
+    };
+    document.documentElement.style.overflowX = "clip";
+    document.documentElement.style.overflowY = "visible";
+    document.body.style.overflowX = "clip";
+    document.body.style.overflowY = "visible";
+    if (root) { root.style.overflowX = "clip"; root.style.overflowY = "visible"; }
+    return () => {
+      document.documentElement.style.overflowX = prev.htmlX;
+      document.documentElement.style.overflowY = prev.htmlY;
+      document.body.style.overflowX = prev.bodyX;
+      document.body.style.overflowY = prev.bodyY;
+      if (root) { root.style.overflowX = prev.rootX; root.style.overflowY = prev.rootY; }
+    };
+  }, []);
+
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
@@ -179,7 +206,12 @@ function Hero() {
     const MIN_WIDTH = 672; // max-w-2xl
     const MAX_WIDTH = 1152; // max-w-6xl
     let rafId: number | null = null;
-    const getScrollY = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const getScrollY = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      document.getElementById("root")?.scrollTop ||
+      0;
     const updateVideoWidth = () => {
       rafId = null;
       if (!videoRef.current) return;
@@ -193,13 +225,16 @@ function Hero() {
       if (rafId) return;
       rafId = requestAnimationFrame(updateVideoWidth);
     };
+    const rootEl = document.getElementById("root");
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("scroll", onScroll, { passive: true });
+    rootEl?.addEventListener("scroll", onScroll, { passive: true });
     updateVideoWidth();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("scroll", onScroll);
+      rootEl?.removeEventListener("scroll", onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
