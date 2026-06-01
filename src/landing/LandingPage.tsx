@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import Lottie from "lottie-react";
 
@@ -136,12 +137,12 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-3 justify-self-end">
-          <a
-            href="#login"
+          <Link
+            to="/login"
             className="hidden sm:inline-flex text-[14px] text-neutral-700 hover:text-neutral-900"
           >
             Sign in
-          </a>
+          </Link>
           <a
             href="#install"
             className="inline-flex h-10 items-center rounded-full bg-[color:var(--violet)] px-5 text-[14px] font-medium text-white hover:bg-[color:var(--violet-hover)] transition-colors"
