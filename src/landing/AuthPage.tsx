@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import Lottie from "lottie-react";
 import { signIn } from "../data/store";
 
 interface AuthPageProps {
