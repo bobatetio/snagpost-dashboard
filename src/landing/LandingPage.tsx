@@ -1012,7 +1012,7 @@ function WhereItWorks() {
           </div>
 
           {/* Right column — Lottie (natural 541×609 ratio) */}
-          <div className="w-full md:w-[48%] shrink-0 rounded-[28px]">
+          <div className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden">
             <LottieCard path={`${BASE}/Where it works.json`} className="w-full" />
           </div>
 
