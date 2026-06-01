@@ -417,7 +417,9 @@
 .auth2-bg-layer {
   position: absolute;
   inset: 0;
-  background: url("/snagpost-dashboard/Image Content.png") 0% center / cover no-repeat;
+  background-size: cover;
+  background-position: 0% center;
+  background-repeat: no-repeat;
   animation: auth-bg-pan 18s linear infinite;
   z-index: 0;
   border-radius: inherit;

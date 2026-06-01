@@ -126,8 +126,8 @@ export function AuthPage({ mode }: AuthPageProps) {
 
       {/* ── Right panel ── */}
       <div className="auth2-right">
-        <div className="auth2-bg-layer" />
-        <div className="auth2-bg-layer auth2-bg-layer--2" />
+        <div className="auth2-bg-layer" style={{ backgroundImage: `url('${BASE}/Image%20Content.png')` }} />
+        <div className="auth2-bg-layer auth2-bg-layer--2" style={{ backgroundImage: `url('${BASE}/Image%20Content.png')` }} />
         <div className="auth2-right-content">
           <h2 className="auth2-right-title">
             The smartest way to research<br />Facebook creators
