@@ -136,11 +136,10 @@ export function AuthPage({ mode }: AuthPageProps) {
           <p className="auth2-right-sub">
             Capture every post, like, and share from any profile — straight to a dashboard you can study.
           </p>
-          <div className="auth2-mockup-wrap">
-            <AuthLottie base={BASE} />
-          </div>
         </div>
-        <AuthMarquee />
+        <div className="auth2-lottie-wrap">
+          <AuthLottie base={BASE} />
+        </div>
       </div>
     </div>
   );

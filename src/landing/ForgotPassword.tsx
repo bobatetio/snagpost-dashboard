@@ -90,11 +90,10 @@ export function ForgotPassword() {
         <div className="auth2-right-content">
           <h2 className="auth2-right-title">The smartest way to research<br />Facebook creators</h2>
           <p className="auth2-right-sub">Capture every post, like, and share from any profile — straight to a dashboard you can study.</p>
-          <div className="auth2-mockup-wrap">
-            <ForgotLottie base={BASE} />
-          </div>
         </div>
-        <AuthMarquee />
+        <div className="auth2-lottie-wrap">
+          <ForgotLottie base={BASE} />
+        </div>
       </div>
     </div>
   );

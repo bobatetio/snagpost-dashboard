@@ -481,12 +481,22 @@
 .auth2-mockup-wrap {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.20);
 }
 .auth2-mockup {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* Lottie — bottom-right aligned, smaller */
+.auth2-lottie-wrap {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 58%;
+  z-index: 2;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 /* Scrolling data-point chips strip */
