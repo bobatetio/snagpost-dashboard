@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Link } from "react-router";
-import { motion, useScroll, useTransform } from "motion/react";
 import Lottie from "lottie-react";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -382,39 +382,40 @@ function SubHero() {
    read into the editor/AI context
 ============================================================ */
 function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string; fallbackImg?: string; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<object | null>(null);
+
   useEffect(() => {
-    setData(null);
-    fetch(path)
-      .then((r) => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
-      .then((json) => { json.op = json.op - 1; setData(json); })
-      .catch(() => {});
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      fetch(path)
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(json => { json.op = json.op - 1; setData(json); })
+        .catch(() => {});
+    }, { rootMargin: "200px" });
+    io.observe(el);
+    return () => io.disconnect();
   }, [path]);
-  if (!data) {
-    if (fallbackImg) return <img src={fallbackImg} className={`${className} block`} alt="" />;
-    return null;
-  }
-  return <Lottie animationData={data} loop autoplay className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }} />;
+
+  return (
+    <div ref={ref} className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }}>
+      {data
+        ? <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "100%" }} />
+        : fallbackImg
+          ? <img src={fallbackImg} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+          : null}
+    </div>
+  );
 }
 
 /* ============================================================
    SCROLL CARD WRAPPER
 ============================================================ */
 function ScrollCard({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.75, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.15, 0.75, 1], [64, 0, 0, -40]);
-  const scale = useTransform(scrollYProgress, [0, 0.15, 0.75, 1], [0.96, 1, 1, 0.97]);
-
-  return (
-    <motion.div ref={ref} style={{ opacity, y, scale }}>
-      {children}
-    </motion.div>
-  );
+  return <div data-animate>{children}</div>;
 }
 
 /* ============================================================
