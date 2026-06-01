@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import Lottie from "lottie-react";
-import { AuthMarquee } from "./AuthPage";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
