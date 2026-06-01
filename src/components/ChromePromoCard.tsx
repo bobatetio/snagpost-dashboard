@@ -8,10 +8,10 @@ export function ChromePromoCard() {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img className="chrome-promo-bg" src="/promo-bg.png" alt="" aria-hidden="true" />
+      <img className="chrome-promo-bg" src={`${import.meta.env.BASE_URL}promo-bg.png`} alt="" aria-hidden="true" />
       <div className="chrome-promo-content">
         <span className="chrome-promo-icon" aria-hidden="true">
-          <img src="/promo-chrome.png" alt="" />
+          <img src={`${import.meta.env.BASE_URL}promo-chrome.png`} alt="" />
         </span>
         <h3 className="chrome-promo-title">Chrome Extension</h3>
         <p className="chrome-promo-sub">Capture posts while you scroll</p>

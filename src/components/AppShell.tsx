@@ -87,8 +87,8 @@ export function AppShell() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img className="app-header-chrome-cta-bg" src="/cta-bg.png" alt="" aria-hidden="true" />
-          <img className="app-header-chrome-cta-icon" src="/cta-chrome.png" alt="" aria-hidden="true" />
+          <img className="app-header-chrome-cta-bg" src={`${import.meta.env.BASE_URL}cta-bg.png`} alt="" aria-hidden="true" />
+          <img className="app-header-chrome-cta-icon" src={`${import.meta.env.BASE_URL}cta-chrome.png`} alt="" aria-hidden="true" />
           <span>Add Social Pulse to Chrome</span>
         </a>
         <NotificationsMenu />
