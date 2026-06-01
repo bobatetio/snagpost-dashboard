@@ -508,7 +508,7 @@ function Features() {
                     {f.body}
                   </p>
                 </div>
-                <div className={`pl-6 md:pl-8 pt-6 md:pt-0 pr-10 flex items-center justify-center overflow-hidden h-full ${i % 2 !== 0 ? "md:order-1" : ""}`}>
+                <div className={`pl-6 md:pl-8 pt-6 md:pt-0 pr-10 flex items-center justify-center h-full ${i % 2 !== 0 ? "md:order-1" : ""}`} style={{ paddingTop: "6px", paddingBottom: "6px" }}>
                   {"lottie" in f ? (
                     <LottieCard path={(f as any).lottie} fallbackImg={(f as any).img} className={(f as any).lottieClass} />
                   ) : (
@@ -1012,7 +1012,7 @@ function WhereItWorks() {
           </div>
 
           {/* Right column — Lottie */}
-          <div className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden self-stretch">
+          <div className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden self-stretch" style={{ padding: "3px" }}>
             <LottieCard path={`${BASE}/Where it works.json`} className="w-full h-full object-cover" />
           </div>
 
