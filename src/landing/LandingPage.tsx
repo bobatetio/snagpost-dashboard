@@ -142,7 +142,7 @@ function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50">
-        <div className="mx-auto max-w-6xl px-5 pt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <div className="mx-auto max-w-6xl px-5 pt-5 flex justify-between md:grid md:grid-cols-[1fr_auto_1fr] items-center gap-4">
           <a href="/" className="flex items-center gap-2 justify-self-start">
             <LogoMark />
             <span className="text-[16px] font-semibold tracking-tight">SnagPost</span>
@@ -445,7 +445,7 @@ function SubHero() {
           <div className="sm:hidden w-full h-px bg-white/30" />
 
           {/* Stats */}
-          <div className="flex w-full sm:flex-1 items-center justify-around gap-4">
+          <div className="flex flex-col sm:flex-1 w-full gap-6 sm:gap-4">
             {stats.map((s) => (
               <StatItem key={s.label} {...s} triggered={triggered} />
             ))}
@@ -884,7 +884,7 @@ function TestimonialsColumn({
             {testimonials.map(({ text, image, name, role }, i) => (
               <div
                 key={i}
-                className="p-6 rounded-[20px] border border-[color:var(--line)] bg-white shadow-[0_4px_24px_rgba(35,57,135,0.06)] max-w-sm w-full"
+                className="p-6 rounded-[20px] border border-[color:var(--line)] bg-white shadow-[0_4px_24px_rgba(35,57,135,0.06)] w-[280px] sm:w-[320px] md:max-w-sm"
               >
                 <p className="text-[14px] leading-7 text-neutral-700">&ldquo;{text}&rdquo;</p>
                 <div className="flex items-center gap-3 mt-5">
@@ -1107,7 +1107,7 @@ function WhereItWorks() {
             </a>
 
             {/* 2x2 numbered cards */}
-            <div className="grid grid-cols-2 gap-4 mt-auto">
+            <div className="grid grid-cols-1 gap-4 mt-auto">
               {cards.map((c) => (
                 <div
                   key={c.title}
@@ -1218,7 +1218,7 @@ function DataPoints() {
       `}</style>
       <div className="mx-auto max-w-6xl px-5">
         <div
-          className="relative w-full rounded-[28px] overflow-hidden flex flex-col pt-12 pb-10"
+          className="datapoints-card relative w-full rounded-[28px] overflow-hidden flex flex-col pt-12 pb-10"
           style={{
             backgroundImage: `url('${BASE}/what-you-get-bg.png')`,
             backgroundSize: "cover",
