@@ -13,6 +13,7 @@ import { GroupDetailPage } from "./pages/GroupDetailPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { LandingPage } from "./landing/LandingPage";
 import { AuthPage } from "./landing/AuthPage";
+import { ForgotPassword } from "./landing/ForgotPassword";
 import { useAuthed } from "./data/store";
 
 /* Gate the dashboard behind auth. Signed-out users land on the marketing
@@ -36,6 +37,7 @@ export function App() {
       <Route path="/" element={<PublicOnly><LandingPage /></PublicOnly>} />
       <Route path="/signup" element={<PublicOnly><AuthPage mode="signup" /></PublicOnly>} />
       <Route path="/login" element={<PublicOnly><AuthPage mode="login" /></PublicOnly>} />
+      <Route path="/forgot-password" element={<PublicOnly><ForgotPassword /></PublicOnly>} />
 
       {/* Authenticated dashboard */}
       <Route
