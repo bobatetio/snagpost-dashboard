@@ -17,11 +17,11 @@ export function ForgotPassword() {
       {/* ── Left panel ── */}
       <div className="auth2-left">
         <div className="auth2-logo">
-          <span className="auth2-logomark">
+          <Link to="/"><span className="auth2-logomark">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
             </svg>
-          </span>
+          </span></Link>
         </div>
 
         <div className="auth2-form-wrap">
@@ -66,7 +66,7 @@ export function ForgotPassword() {
           )}
         </div>
 
-        <p className="auth2-footer">2024 SnagPost, All rights reserved</p>
+        <p className="auth2-footer">2026 SnagPost, All rights reserved</p>
       </div>
 
       {/* ── Right panel ── */}

@@ -33,7 +33,7 @@ export function AuthPage({ mode }: AuthPageProps) {
       {/* ── Left panel ── */}
       <div className="auth2-left">
         <div className="auth2-logo">
-          <LogoMark />
+          <Link to="/"><LogoMark /></Link>
         </div>
 
         <div className="auth2-form-wrap">
@@ -121,7 +121,7 @@ export function AuthPage({ mode }: AuthPageProps) {
           </p>
         </div>
 
-        <p className="auth2-footer">2024 SnagPost, All rights reserved</p>
+        <p className="auth2-footer">2026 SnagPost, All rights reserved</p>
       </div>
 
       {/* ── Right panel ── */}
