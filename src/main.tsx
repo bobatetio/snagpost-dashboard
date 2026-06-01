@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { HashRouter } from "react-router";
 import { App } from "./App";
 import "@fontsource/mona-sans/400.css";
 import "@fontsource/mona-sans/500.css";
@@ -12,7 +12,7 @@ import "./styles/landing.css";
 import "./styles/tailwind.css";
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename={import.meta.env.BASE_URL}>
+  <HashRouter>
     <App />
-  </BrowserRouter>,
+  </HashRouter>,
 );

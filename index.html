@@ -4,13 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SnagPost</title>
-    <script>
-      // Restore path redirected by 404.html
-      (function() {
-        var r = new URLSearchParams(window.location.search).get('r');
-        if (r) window.history.replaceState(null, '', '/snagpost-dashboard' + r);
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>
