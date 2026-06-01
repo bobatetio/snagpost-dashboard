@@ -415,7 +415,16 @@ function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string;
    SCROLL CARD WRAPPER
 ============================================================ */
 function ScrollCard({ children }: { children: React.ReactNode }) {
-  return <div data-animate>{children}</div>;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 48, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 /* ============================================================
