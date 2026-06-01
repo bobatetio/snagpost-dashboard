@@ -408,7 +408,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 48px;
+  padding: 0;
   position: relative;
   overflow: hidden;
   border-radius: 24px;
@@ -425,12 +425,12 @@
   background-size: auto 100%;
   background-position: 0% center;
   background-repeat: no-repeat;
-  animation: auth-bg-pan 20s linear infinite;
+  animation: auth-bg-pan 40s linear infinite;
   z-index: 0;
   border-radius: inherit;
 }
 .auth2-bg-layer--2 {
-  animation-delay: -10s;
+  animation-delay: -20s;
 }
 
 @keyframes auth-bg-pan {
@@ -458,7 +458,7 @@
   position: relative;
   z-index: 2;
 }
-.auth2-right-content { position: relative; }
+.auth2-right-content { position: relative; padding: 48px 48px 0 48px; }
 .auth2-right-title {
   font-size: 30px;
   font-weight: 700;
@@ -488,15 +488,32 @@
   display: block;
 }
 
-/* Lottie — flush bottom-right of panel, compensate for panel padding */
+/* Lottie — truly flush at bottom-right corner */
 .auth2-lottie-wrap {
   position: absolute;
-  bottom: -48px;
-  right: -48px;
-  width: 78%;
+  bottom: 0;
+  right: 0;
+  width: 90%;
   z-index: 2;
-  overflow: hidden;
-  border-radius: 16px 0 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  font-size: 0;
+  overflow: visible;
+}
+.auth2-lottie-wrap > div {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.auth2-lottie-wrap > *,
+.auth2-lottie-wrap svg,
+.auth2-lottie-wrap canvas {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 /* Scrolling data-point chips strip */

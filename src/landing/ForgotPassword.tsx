@@ -13,7 +13,7 @@ function ForgotLottie({ base }: { base: string }) {
       .catch(() => {});
   }, [base]);
   if (!data) return null;
-  return <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block" }} />;
+  return <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block", margin: 0, padding: 0 }} />;
 }
 
 export function ForgotPassword() {
