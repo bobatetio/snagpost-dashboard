@@ -381,16 +381,18 @@ function SubHero() {
    LOTTIE CARD — fetches JSON at runtime so the file is never
    read into the editor/AI context
 ============================================================ */
-function LottieCard({ path, className = "w-full" }: { path: string; className?: string }) {
+function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string; fallbackImg?: string; className?: string }) {
   const [data, setData] = useState<object | null>(null);
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
+    setData(null);
+    setFailed(false);
     fetch(path)
-      .then((r) => r.json())
-      .then((json) => {
-        json.op = json.op - 1;
-        setData(json);
-      });
+      .then((r) => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+      .then((json) => { json.op = json.op - 1; setData(json); })
+      .catch(() => setFailed(true));
   }, [path]);
+  if (failed && fallbackImg) return <img src={fallbackImg} className={`${className} block`} alt="" />;
   if (!data) return null;
   return <Lottie animationData={data} loop autoplay className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }} />;
 }
@@ -507,7 +509,7 @@ function Features() {
                 </div>
                 <div className={`pl-6 md:pl-8 pt-6 md:pt-0 pr-10 flex items-center justify-center overflow-hidden h-full ${i % 2 !== 0 ? "md:order-1" : ""}`}>
                   {"lottie" in f ? (
-                    <LottieCard path={(f as any).lottie} className={(f as any).lottieClass} />
+                    <LottieCard path={(f as any).lottie} fallbackImg={(f as any).img} className={(f as any).lottieClass} />
                   ) : (
                     <img
                       src={(f as any).img}
