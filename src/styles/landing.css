@@ -206,8 +206,16 @@
   font-family: var(--font-ui, system-ui, sans-serif);
   background: #fff;
 }
-@media (max-width: 800px) {
-  .auth2-page { grid-template-columns: 1fr; }
+/* Tablet: show both panels but adjust proportions */
+@media (min-width: 600px) and (max-width: 900px) {
+  .auth2-page { grid-template-columns: 1fr 1fr; }
+  .auth2-right { margin: 12px 12px 12px 0; height: calc(100vh - 24px); max-height: calc(100vh - 24px); border-radius: 16px; }
+  .auth2-right-title { font-size: 22px; }
+  .auth2-lottie-sizer { width: 72%; }
+}
+/* Mobile: single column, hide right panel */
+@media (max-width: 599px) {
+  .auth2-page { grid-template-columns: 1fr; height: auto; max-height: none; overflow: visible; }
   .auth2-right { display: none; }
 }
 
@@ -221,7 +229,12 @@
   height: 100vh;
   overflow-y: auto;
 }
-@media (max-width: 480px) { .auth2-left { padding: 24px 20px; } }
+@media (max-width: 599px) {
+  .auth2-left { padding: 28px 20px; height: auto; min-height: 100vh; }
+}
+@media (min-width: 600px) and (max-width: 900px) {
+  .auth2-left { padding: 28px 32px; }
+}
 
 .auth2-logo {
   width: 100%;
@@ -267,6 +280,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 20px;
+}
+@media (max-width: 380px) {
+  .auth2-social-row { grid-template-columns: 1fr; }
 }
 .auth2-social-btn {
   display: flex;
@@ -547,6 +563,38 @@
   font-size: 12.5px;
   font-weight: 500;
   color: rgba(255,255,255,0.90);
+}
+
+/* ═══════════════════════════════════════════
+   LANDING — MOBILE / TABLET RESPONSIVE
+═══════════════════════════════════════════ */
+
+/* Features bento cards — tighten on mobile */
+@media (max-width: 640px) {
+  .hero-frame { border-radius: 16px 16px 0 0; }
+}
+
+/* DataPoints "what you get" card — reduce padding on mobile */
+@media (max-width: 640px) {
+  .landing-root .relative.w-full.rounded-\[28px\].overflow-hidden.flex.flex-col.pt-12 {
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+}
+
+/* Footer — let link columns wrap cleanly on very small screens */
+@media (max-width: 480px) {
+  .landing-root footer .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .landing-root footer .col-span-2 {
+    grid-column: span 2;
+  }
+}
+
+/* Pricing cards — reduce padding on mobile */
+@media (max-width: 640px) {
+  .landing-root .rounded-\[28px\].p-7 { padding: 20px; }
 }
 
 /* kept for TS — no longer used */

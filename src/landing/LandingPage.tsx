@@ -104,6 +104,7 @@ export function LandingPage() {
 ============================================================ */
 function Header() {
   const [activeHref, setActiveHref] = useState("#");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
     { label: "Home", href: "#" },
@@ -115,71 +116,113 @@ function Header() {
 
   useEffect(() => {
     const sectionIds = ["features", "how", "pricing", "faq"];
-
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      if (scrollY < 200) {
-        setActiveHref("#");
-        return;
-      }
+      if (scrollY < 200) { setActiveHref("#"); return; }
       let current = "#";
       sectionIds.forEach((id) => {
         const el = document.getElementById(id);
-        if (el) {
-          const top = el.getBoundingClientRect().top;
-          if (top <= window.innerHeight * 0.5) current = `#${id}`;
-        }
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) current = `#${id}`;
       });
       setActiveHref(current);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="mx-auto max-w-6xl px-5 pt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-        <a href="/" className="flex items-center gap-2 justify-self-start">
-          <LogoMark />
-          <span className="text-[16px] font-semibold tracking-tight">
-            SnagPost
-          </span>
-        </a>
+  // Close menu on scroll
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = () => setMenuOpen(false);
+    window.addEventListener("scroll", close, { passive: true, once: true });
+    return () => window.removeEventListener("scroll", close);
+  }, [menuOpen]);
 
-        <nav className="hidden md:flex justify-self-center items-center gap-0.5 rounded-full bg-white border border-[color:var(--line)] px-1.5 py-1.5 shadow-[0_2px_6px_rgba(16,24,48,0.04)]">
+  return (
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div className="mx-auto max-w-6xl px-5 pt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+          <a href="/" className="flex items-center gap-2 justify-self-start">
+            <LogoMark />
+            <span className="text-[16px] font-semibold tracking-tight">SnagPost</span>
+          </a>
+
+          <nav className="hidden md:flex justify-self-center items-center gap-0.5 rounded-full bg-white border border-[color:var(--line)] px-1.5 py-1.5 shadow-[0_2px_6px_rgba(16,24,48,0.04)]">
+            {links.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className={
+                  activeHref === l.href
+                    ? "px-4 py-1.5 text-[14px] rounded-full bg-[color:var(--violet)] text-white font-medium transition-colors"
+                    : "px-4 py-1.5 text-[14px] rounded-full text-neutral-700 hover:text-neutral-900 transition-colors"
+                }
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3 justify-self-end">
+            <Link to="/login" className="hidden sm:inline-flex text-[14px] text-neutral-700 hover:text-neutral-900">
+              Sign in
+            </Link>
+            <a
+              href="#install"
+              className="hidden md:inline-flex h-10 items-center rounded-full bg-[color:var(--violet)] px-5 text-[14px] font-medium text-white hover:bg-[color:var(--violet-hover)] transition-colors"
+            >
+              Add to Chrome
+            </a>
+            {/* Hamburger — mobile only */}
+            <button
+              className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-full bg-white border border-[color:var(--line)] shadow-sm gap-[5px]"
+              onClick={() => setMenuOpen(v => !v)}
+              aria-label="Toggle menu"
+            >
+              <span className={`block w-4.5 h-[1.5px] bg-neutral-800 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} style={{ width: 18 }} />
+              <span className={`block h-[1.5px] bg-neutral-800 transition-all duration-200 ${menuOpen ? "opacity-0" : "opacity-100"}`} style={{ width: 18 }} />
+              <span className={`block h-[1.5px] bg-neutral-800 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`} style={{ width: 18 }} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile nav drawer */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setMenuOpen(false)}
+      >
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+        <div
+          className={`absolute top-[72px] left-4 right-4 bg-white rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] border border-[color:var(--line)] p-3 transition-all duration-300 ${menuOpen ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"}`}
+          onClick={e => e.stopPropagation()}
+        >
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className={
-                activeHref === l.href
-                  ? "px-4 py-1.5 text-[14px] rounded-full bg-[color:var(--violet)] text-white font-medium transition-colors"
-                  : "px-4 py-1.5 text-[14px] rounded-full text-neutral-700 hover:text-neutral-900 transition-colors"
-              }
+              onClick={() => setMenuOpen(false)}
+              className={`flex items-center px-4 py-3 rounded-xl text-[15px] font-medium transition-colors ${activeHref === l.href ? "bg-[color:var(--violet-soft)] text-[color:var(--violet)]" : "text-neutral-700 hover:bg-neutral-50"}`}
             >
               {l.label}
             </a>
           ))}
-        </nav>
-
-        <div className="flex items-center gap-3 justify-self-end">
-          <Link
-            to="/login"
-            className="hidden sm:inline-flex text-[14px] text-neutral-700 hover:text-neutral-900"
-          >
-            Sign in
-          </Link>
-          <a
-            href="#install"
-            className="inline-flex h-10 items-center rounded-full bg-[color:var(--violet)] px-5 text-[14px] font-medium text-white hover:bg-[color:var(--violet-hover)] transition-colors"
-          >
-            Add to Chrome
-          </a>
+          <div className="mt-2 pt-2 border-t border-[color:var(--line)] flex flex-col gap-2 px-1 pb-1">
+            <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center justify-center h-11 rounded-xl text-[15px] font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+              Sign in
+            </Link>
+            <a
+              href="#install"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-center h-11 rounded-xl bg-[color:var(--violet)] text-white text-[15px] font-medium hover:bg-[color:var(--violet-hover)] transition-colors"
+            >
+              Add to Chrome
+            </a>
+          </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
 
@@ -385,7 +428,7 @@ function SubHero() {
       <div className="mx-auto max-w-6xl px-5">
         <div
           ref={ref}
-          className="mx-auto w-full rounded-[28px] overflow-hidden flex items-center gap-6 px-10 py-10"
+          className="mx-auto w-full rounded-[28px] overflow-hidden flex flex-col sm:flex-row items-center gap-6 px-6 sm:px-10 py-8 sm:py-10"
           style={{
             backgroundImage: `url('${BASE}/subhero bg.png')`,
             backgroundSize: "cover",
@@ -393,15 +436,16 @@ function SubHero() {
           }}
         >
           {/* Left label */}
-          <p className="text-white font-bold text-[20px] leading-[1.35] w-[200px] shrink-0">
+          <p className="text-white font-bold text-[18px] sm:text-[20px] leading-[1.35] sm:w-[200px] shrink-0 text-center sm:text-left">
             Used By Facebook Creators, Marketers, And Agencies.
           </p>
 
           {/* Divider */}
-          <div className="w-px self-stretch bg-white/30 shrink-0 my-1" />
+          <div className="hidden sm:block w-px self-stretch bg-white/30 shrink-0 my-1" />
+          <div className="sm:hidden w-full h-px bg-white/30" />
 
           {/* Stats */}
-          <div className="flex flex-1 items-center justify-around gap-4">
+          <div className="flex w-full sm:flex-1 items-center justify-around gap-4">
             {stats.map((s) => (
               <StatItem key={s.label} {...s} triggered={triggered} />
             ))}
@@ -697,7 +741,7 @@ function HowItWorks() {
         <div className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-3 md:items-start md:gap-6">
           {STEPS.map((step, i) => {
             const doodle = (
-              <div className={`flex ${step.doodleAlign}`}>
+              <div className={`hidden md:flex ${step.doodleAlign}`}>
                 <img
                   src={step.doodle}
                   alt=""
@@ -891,7 +935,7 @@ function Testimonials() {
 
       <div
         className="mt-12 flex gap-4 justify-center"
-        style={{ height: 600, maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" }}
+        style={{ height: "min(600px, 70vh)", maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" }}
       >
         <TestimonialsColumn testimonials={col1} duration={18} />
         <TestimonialsColumn testimonials={col2} duration={22} className="hidden md:block" />
