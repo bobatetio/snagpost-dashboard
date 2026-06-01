@@ -407,13 +407,12 @@
   background: #0d1e5e;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0;
   position: relative;
   overflow: hidden;
   border-radius: 24px;
   margin: 20px 20px 20px 0;
-  gap: 32px;
   height: calc(100vh - 40px);
   max-height: calc(100vh - 40px);
 }
@@ -425,12 +424,12 @@
   background-size: auto 100%;
   background-position: 0% center;
   background-repeat: no-repeat;
-  animation: auth-bg-pan 40s linear infinite;
+  animation: auth-bg-pan 160s linear infinite;
   z-index: 0;
   border-radius: inherit;
 }
 .auth2-bg-layer--2 {
-  animation-delay: -20s;
+  animation-delay: -80s;
 }
 
 @keyframes auth-bg-pan {
@@ -454,14 +453,14 @@
 }
 
 /* All direct children sit above the bg layers */
-.auth2-right > *:not(.auth2-bg-layer):not(.auth2-lottie-wrap) {
+.auth2-right > *:not(.auth2-bg-layer) {
   position: relative;
   z-index: 2;
 }
-.auth2-right-content { position: relative; padding: clamp(48px, 7vh, 96px) 48px 0 48px; }
+.auth2-right-content { position: relative; padding: 0 48px; text-align: center; }
 .auth2-right-title {
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 500;
   color: #fff;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -488,32 +487,15 @@
   display: block;
 }
 
-/* Lottie — truly flush at bottom-right corner */
+/* Lottie — centered between headline and marquee */
 .auth2-lottie-wrap {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 78%;
-  z-index: 2;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  font-size: 0;
-  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-10px);
 }
-.auth2-lottie-wrap > div {
-  display: block;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-}
-.auth2-lottie-wrap > *,
-.auth2-lottie-wrap svg,
-.auth2-lottie-wrap canvas {
-  display: block;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
+.auth2-lottie-sizer {
+  width: 58%;
 }
 
 /* Scrolling data-point chips strip */

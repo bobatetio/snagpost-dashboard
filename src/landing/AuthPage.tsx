@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router";
 import Lottie from "lottie-react";
 import { signIn } from "../data/store";
@@ -133,13 +133,13 @@ export function AuthPage({ mode }: AuthPageProps) {
           <h2 className="auth2-right-title">
             The smartest way to research<br />Facebook creators
           </h2>
-          <p className="auth2-right-sub">
-            Capture every post, like, and share from any profile — straight to a dashboard you can study.
-          </p>
         </div>
         <div className="auth2-lottie-wrap">
-          <AuthLottie base={BASE} />
+          <div className="auth2-lottie-sizer">
+            <AuthLottie base={BASE} />
+          </div>
         </div>
+        <AuthMarquee />
       </div>
     </div>
   );
@@ -195,6 +195,7 @@ function EyeOffIcon() {
 /* ── Sign In Lottie ── */
 function AuthLottie({ base }: { base: string }) {
   const [data, setData] = useState<object | null>(null);
+  const lottieRef = useRef<any>(null);
   useEffect(() => {
     fetch(`${base}/Sign%20In%20lottie.json`)
       .then(r => r.ok ? r.json() : Promise.reject())
@@ -202,8 +203,7 @@ function AuthLottie({ base }: { base: string }) {
       .catch(() => {});
   }, [base]);
   if (!data) return null;
-  return <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block", margin: 0, padding: 0 }} />;
-
+  return <Lottie lottieRef={lottieRef} animationData={data} loop autoplay onDOMLoaded={() => lottieRef.current?.setSpeed(0.4)} style={{ width: "100%", height: "auto", display: "block", margin: 0, padding: 0 }} />;
 }
 
 /* ── Scrolling data-point marquee (mirrors the landing page "What you get" section) ── */
