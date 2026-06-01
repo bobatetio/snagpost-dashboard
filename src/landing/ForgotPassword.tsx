@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import Lottie from "lottie-react";
 import { AuthMarquee } from "./AuthPage";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+function ForgotLottie({ base }: { base: string }) {
+  const [data, setData] = useState<object | null>(null);
+  useEffect(() => {
+    fetch(`${base}/Sign%20In%20lottie.json`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(json => { json.op = json.op - 1; setData(json); })
+      .catch(() => {});
+  }, [base]);
+  if (!data) return null;
+  return <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block" }} />;
+}
 
 export function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -78,7 +91,7 @@ export function ForgotPassword() {
           <h2 className="auth2-right-title">The smartest way to research<br />Facebook creators</h2>
           <p className="auth2-right-sub">Capture every post, like, and share from any profile — straight to a dashboard you can study.</p>
           <div className="auth2-mockup-wrap">
-            <img src={`${BASE}/hero-panel.jpg`} alt="SnagPost dashboard" className="auth2-mockup" />
+            <ForgotLottie base={BASE} />
           </div>
         </div>
         <AuthMarquee />
