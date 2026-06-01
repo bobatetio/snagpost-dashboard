@@ -488,13 +488,14 @@
   display: block;
 }
 
-/* Lottie — centered, larger */
+/* Lottie — fixed to bottom-right, flush with panel edges */
 .auth2-lottie-wrap {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 82%;
   z-index: 2;
-  width: 88%;
-  margin: 0 auto;
-  border-radius: 16px;
+  border-radius: 24px 0 24px 0;
   overflow: hidden;
 }
 
