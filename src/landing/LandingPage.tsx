@@ -392,8 +392,10 @@ function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string;
       .then((json) => { json.op = json.op - 1; setData(json); })
       .catch(() => setFailed(true));
   }, [path]);
-  if (failed && fallbackImg) return <img src={fallbackImg} className={`${className} block`} alt="" />;
-  if (!data) return null;
+  if (!data) {
+    if (fallbackImg) return <img src={fallbackImg} className={`${className} block`} alt="" />;
+    return null;
+  }
   return <Lottie animationData={data} loop autoplay className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }} />;
 }
 
@@ -445,7 +447,7 @@ function Features() {
               tag: "Auto-capture",
               title: "Captures every post as you scroll",
               body: "The extension detects each post as it loads on any Facebook profile, pulling the engagement data, post type, caption, and date automatically, without you clicking a single button.",
-              img: "/Auto-capture.png",
+              img: `${BASE}/Auto-capture.png`,
               imgAlt: "Auto-capture feature",
               lottie: `${BASE}/Auto-capture.json`,
               lottieClass: "w-[68%]",
