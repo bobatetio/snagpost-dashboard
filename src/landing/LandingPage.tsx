@@ -383,14 +383,12 @@ function SubHero() {
 ============================================================ */
 function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string; fallbackImg?: string; className?: string }) {
   const [data, setData] = useState<object | null>(null);
-  const [failed, setFailed] = useState(false);
   useEffect(() => {
     setData(null);
-    setFailed(false);
     fetch(path)
       .then((r) => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
       .then((json) => { json.op = json.op - 1; setData(json); })
-      .catch(() => setFailed(true));
+      .catch(() => {});
   }, [path]);
   if (!data) {
     if (fallbackImg) return <img src={fallbackImg} className={`${className} block`} alt="" />;
