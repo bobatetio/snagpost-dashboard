@@ -454,11 +454,11 @@
 }
 
 /* All direct children sit above the bg layers */
-.auth2-right > *:not(.auth2-bg-layer) {
+.auth2-right > *:not(.auth2-bg-layer):not(.auth2-lottie-wrap) {
   position: relative;
   z-index: 2;
 }
-.auth2-right-content { position: relative; padding: 48px 48px 0 48px; }
+.auth2-right-content { position: relative; padding: clamp(48px, 7vh, 96px) 48px 0 48px; }
 .auth2-right-title {
   font-size: 30px;
   font-weight: 700;
@@ -493,7 +493,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 90%;
+  width: 78%;
   z-index: 2;
   margin: 0;
   padding: 0;
