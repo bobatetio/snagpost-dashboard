@@ -1,0 +1,29 @@
+{
+  "name": "socialpulse-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "SocialPulse dashboard — library, folders, and analytics for captured Facebook posts.",
+  "scripts": {
+    "dev": "vite --port 5174",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 5174",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/mona-sans": "^5.2.8",
+    "@tailwindcss/vite": "^4.3.0",
+    "lucide-react": "^0.487.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.13.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.3.5"
+  }
+}

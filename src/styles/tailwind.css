@@ -1,0 +1,41 @@
+/* Tailwind for the ported landing + auth pages.
+ *
+ * The dashboard's app.css ships an un-layered global reset
+ * (`* { margin:0; padding:0 }`). Un-layered CSS always beats layered CSS,
+ * so if Tailwind utilities stayed in `@layer utilities` the reset would
+ * wipe every padding/margin utility on the landing page. Fix: import the
+ * utilities WITHOUT a layer so ordinary specificity applies
+ * (`.pt-16` 0,1,0 beats `*` 0,0,0). Preflight is skipped — the dashboard
+ * reset already zeroes margins, box-sizing, button + anchor styles. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css";
+
+/* Brand theme tokens for the ported landing + auth pages. */
+@theme {
+  --color-brand: #8D72FF;
+  --color-brand-mid: #6B4FE0;
+  --color-brand-deep: #4D32B8;
+  --color-brand-wash: #F1ECFF;
+  --color-brand-soft: #FAF7FF;
+  --color-ink: #0F0F1A;
+  --color-ink-2: #3A3A55;
+  --color-ink-3: #6B6B85;
+
+  --color-tone-red: #FF6B6B;
+  --color-tone-amber: #FFA94D;
+  --color-tone-lime: #C5E866;
+  --color-tone-green: #69E091;
+
+  --color-band: #1B1640;
+  --color-band-2: #2A2160;
+
+  --font-display: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Preflight is skipped, so restore the couple of resets the landing markup
+ * actually relies on (the dashboard reset doesn't cover these). */
+.landing ul,
+.landing ol { list-style: none; }
+.landing img,
+.landing svg { display: block; }
+.landing button { cursor: pointer; }

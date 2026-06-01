@@ -1,0 +1,118 @@
+/* SocialPulse dashboard design tokens — same palette as the Chrome extension.
+ *
+ * Dark mode is the default (:root). Light mode is opt-in via
+ * `data-theme="light"` on <html>. The theme toggle in the sidebar mutates
+ * that attribute and persists to localStorage. */
+
+:root {
+  /* ============================================================
+   * DARK MODE (default)
+   * ============================================================ */
+
+  /* Primary */
+  --primary-deep:  #8D72FF;
+  --primary-mid:   #B19AFF;
+  --primary-glow:  #C8B8FF;
+  --primary-wash:  rgba(141, 114, 255, 0.18);
+  --brand-purple:  #8D72FF;
+
+  /* Ink */
+  --ink-primary:   #FFFFFF;
+  --ink-secondary: rgba(255, 255, 255, 0.73);
+  --ink-muted:     #AEB9E1;
+  --ink-soft:      #D9E1FA;
+  --ink-section:   rgba(174, 185, 225, 0.89);
+
+  /* Surfaces */
+  --surface-page:  #0A0B1E;
+  --surface-card:  #111232;
+  --surface-soft:  #1A1B3D;
+  --card-border:   #1D1F49;
+  --border-hairline: rgba(255, 255, 255, 0.07);
+  --track-bg:      rgba(255, 255, 255, 0.10);
+  --divider:       rgba(255, 255, 255, 0.07);
+
+  /* Type tone colors — graduated purple palette (matches extension) */
+  --tone-video:     #8C7BF6;
+  --tone-carousel:  #7967D7;
+  --tone-slideshow: #C6B5FA;
+  --tone-photo:     #DBD0FA;
+  --tone-link:      #E5E0F8;
+
+  /* Tonal pills — keep existing dashboard semantics */
+  --pill-video-bg:     rgba(140, 123, 246, 0.18);  --pill-video-fg:     #B19AFF;
+  --pill-slideshow-bg: rgba(198, 181, 250, 0.18);  --pill-slideshow-fg: #C6B5FA;
+  --pill-carousel-bg:  rgba(121, 103, 215, 0.22);  --pill-carousel-fg: #B49BFF;
+  --pill-photo-bg:     rgba(219, 208, 250, 0.16);  --pill-photo-fg:     #E5E0F8;
+  --pill-link-bg:      rgba(229, 224, 248, 0.16);  --pill-link-fg:      #E5E0F8;
+  --pill-reactions-bg: rgba(95, 220, 163, 0.16);   --pill-reactions-fg: #57DCA3;
+
+  /* Shadows */
+  --shadow-card:        none;
+  --shadow-card-hover:  none;
+  --shadow-modal:       0 24px 80px rgba(0, 0, 0, 0.6);
+
+  /* Atmospheric bloom colors */
+  --bloom-a: #2E1F4F;
+  --bloom-b: #1F1F4A;
+
+  /* Iridescent CTA + spinner */
+  --cta-grad:   #8D72FF;
+  --cta-glow:   0 8px 24px -8px rgba(141, 114, 255, 0.45);
+
+  /* Radii */
+  --radius-card:    16px;
+  --radius-card-lg: 20px;
+  --radius-pill:    999px;
+  --radius-button:  12px;
+  --radius-icon:    8px;
+
+  /* Type — Mona Sans across the app */
+  --font-display: "Mona Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-ui:      "Mona Sans", "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Motion */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft:    cubic-bezier(0.25, 0.1, 0.25, 1);
+  --motion-card:  180ms;
+  --motion-page:  240ms;
+  --motion-pulse: 4s;
+}
+
+/* ============================================================
+ * LIGHT MODE — overrides only
+ * ============================================================ */
+[data-theme="light"] {
+  --primary-deep:  #6B4EE6;
+  --primary-mid:   #8B6FF0;
+  --primary-glow:  #C9B8FF;
+  --primary-wash:  rgba(141, 114, 255, 0.10);
+
+  --ink-primary:   #0F0F1A;
+  --ink-secondary: rgba(15, 15, 26, 0.72);
+  --ink-muted:     #6B6B82;
+  --ink-soft:      #3F3F55;
+  --ink-section:   rgba(15, 15, 26, 0.55);
+
+  --surface-page:  #F4F1FE;
+  --surface-card:  #FFFFFF;
+  --surface-soft:  rgba(15, 15, 26, 0.04);
+  --card-border:   rgba(141, 114, 255, 0.18);
+  --border-hairline: rgba(15, 15, 26, 0.06);
+  --track-bg:      rgba(15, 15, 26, 0.08);
+  --divider:       rgba(15, 15, 26, 0.06);
+
+  --pill-video-bg:     rgba(140, 123, 246, 0.10);   --pill-video-fg:     #6B4EE6;
+  --pill-slideshow-bg: rgba(198, 181, 250, 0.16);   --pill-slideshow-fg: #6B4EE6;
+  --pill-carousel-bg:  rgba(121, 103, 215, 0.10);   --pill-carousel-fg: #6B4EE6;
+  --pill-photo-bg:     rgba(219, 208, 250, 0.24);   --pill-photo-fg:     #6B4EE6;
+  --pill-link-bg:      rgba(15, 15, 26, 0.06);      --pill-link-fg:      #4F4866;
+  --pill-reactions-bg: rgba(47, 203, 143, 0.10);    --pill-reactions-fg: #2F8559;
+
+  --shadow-card:       none;
+  --shadow-card-hover: none;
+  --shadow-modal:      0 20px 60px rgba(40, 30, 60, 0.18);
+
+  --bloom-a: #E8DFFF;
+  --bloom-b: #FFE8DC;
+}
