@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ArrowRight, Check } from "lucide-react";
-import { Wordmark } from "./Wordmark";
-import { MockPanel } from "./MockPanel";
 import { signIn } from "../data/store";
 
 interface AuthPageProps {
@@ -34,8 +32,8 @@ export function AuthPage({ mode }: AuthPageProps) {
     <div className="landing font-display flex min-h-screen bg-white text-ink">
       {/* Form column */}
       <div className="flex w-full flex-col px-6 py-8 sm:px-12 lg:w-[52%]">
-        <Link to="/" className="inline-flex">
-          <Wordmark />
+        <Link to="/" className="inline-flex text-[16px] font-semibold tracking-tight">
+          SnagPost
         </Link>
 
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-10">
@@ -137,9 +135,6 @@ export function AuthPage({ mode }: AuthPageProps) {
               </li>
             ))}
           </ul>
-          <div className="pointer-events-none">
-            <MockPanel variant="feed" />
-          </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import "@fontsource/mona-sans/700.css";
 import "@fontsource/mona-sans/800.css";
 import "./styles/theme.css";
 import "./styles/app.css";
+import "./styles/landing.css";
 import "./styles/tailwind.css";
 
 createRoot(document.getElementById("root")!).render(
