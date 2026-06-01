@@ -401,11 +401,11 @@ function LottieCard({ path, fallbackImg, className = "w-full" }: { path: string;
   }, [path]);
 
   return (
-    <div ref={ref} className={`${className} block`}>
+    <div ref={ref} className={`${className} block`} style={{ height: className.includes("h-full") ? "100%" : "auto" }}>
       {data
-        ? <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "auto", display: "block" }} />
+        ? <Lottie animationData={data} loop autoplay style={{ width: "100%", height: "100%", display: "block" }} />
         : fallbackImg
-          ? <img src={fallbackImg} alt="" style={{ width: "100%", height: "auto", display: "block" }} />
+          ? <img src={fallbackImg} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           : null}
     </div>
   );
@@ -977,7 +977,7 @@ function WhereItWorks() {
   return (
     <section className="py-20 bg-white">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="flex flex-col md:flex-row gap-12 items-start">
+        <div className="flex flex-col md:flex-row gap-12 items-stretch">
 
           {/* Left column */}
           <div className="flex-1 flex flex-col">
@@ -1020,9 +1020,12 @@ function WhereItWorks() {
             </div>
           </div>
 
-          {/* Right column — Lottie (natural 541×609 ratio) */}
-          <div className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden">
-            <LottieCard path={`${BASE}/Where it works.json`} className="w-full" />
+          {/* Right column — Lottie locked to 541×609 natural ratio */}
+          <div
+            className="w-full md:w-[48%] shrink-0 rounded-[28px] overflow-hidden"
+            style={{ aspectRatio: "541 / 609" }}
+          >
+            <LottieCard path={`${BASE}/Where it works.json`} className="w-full h-full" />
           </div>
 
         </div>
