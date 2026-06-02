@@ -2,7 +2,6 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import Lottie from "lottie-react";
-import HalideLanding from "./HalideLanding";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -83,7 +82,7 @@ export function LandingPage() {
     <div className="landing-root">
       <Header />
       <main>
-        <HalideLanding />
+        <Hero />
         <SubHero />
         <Features />
         <HowItWorks />
@@ -240,6 +239,137 @@ function LogoMark() {
   );
 }
 
+/* ============================================================
+   HERO
+============================================================ */
+function Hero() {
+  const videoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const MIN_WIDTH = 672; // max-w-2xl
+    const MAX_WIDTH = 1152; // max-w-6xl
+    let rafId: number | null = null;
+    const getScrollY = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      document.getElementById("root")?.scrollTop ||
+      0;
+    const updateVideoWidth = () => {
+      rafId = null;
+      if (!videoRef.current) return;
+      const scrolled = getScrollY();
+      const growOver = window.innerHeight * 0.6;
+      const progress = Math.min(scrolled / growOver, 1);
+      const width = MIN_WIDTH + (MAX_WIDTH - MIN_WIDTH) * progress;
+      videoRef.current.style.maxWidth = `${width}px`;
+    };
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(updateVideoWidth);
+    };
+    const rootEl = document.getElementById("root");
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
+    rootEl?.addEventListener("scroll", onScroll, { passive: true });
+    updateVideoWidth();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("scroll", onScroll);
+      rootEl?.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  return (
+    <section className="hero-bg relative overflow-hidden pt-32 pb-0" style={{ ["--hero-bg-url" as string]: `url('${BASE}/hero-2.png')` }}>
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="flex flex-col items-center text-center gap-5">
+          <span
+            className="eyebrow"
+            data-animate
+            style={{
+              background: "transparent",
+              border: "none",
+              boxShadow: "none",
+              fontSize: "14px",
+              padding: "0",
+            }}
+          >
+            <span className="eyebrow-dot" />
+            Built by the team behind TokScript
+          </span>
+
+          <h1
+            data-animate
+            data-animate-delay="1"
+            className="text-[32px] sm:text-[44px] md:text-[56px] leading-[1.05] font-bold tracking-[-0.03em] text-neutral-900 max-w-4xl mx-auto"
+          >
+            Stop Guessing What Works on Facebook. Start Seeing It.
+          </h1>
+
+          <p
+            data-animate
+            data-animate-delay="2"
+            className="text-[14px] sm:text-[15px] leading-6 text-neutral-700 max-w-xl"
+          >
+            A Chrome extension that captures every post, like, and share from
+            any Facebook profile — straight to a dashboard you can study.
+          </p>
+
+          <div
+            data-animate
+            data-animate-delay="3"
+            className="flex flex-wrap items-center justify-center gap-3 pt-2"
+          >
+            <a
+              href="#install"
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-2 h-12 px-5 rounded-full bg-[color:var(--violet)] text-white font-medium text-[15px] hover:bg-[color:var(--violet-hover)] transition-colors"
+            >
+              Try SnagPost Now, It&apos;s Free
+              <ArrowRight />
+            </a>
+          </div>
+
+        </div>
+
+        <div
+          ref={videoRef}
+          className="mt-8 mx-auto"
+          style={{ maxWidth: "672px", willChange: "max-width" }}
+          data-animate
+          data-animate-delay="4"
+        >
+          <div className="hero-frame">
+            <video
+              poster={`${BASE}/hero-mockup.png`}
+              muted
+              playsInline
+              loop
+              preload="metadata"
+              aria-label="SnagPost capturing a Facebook profile"
+              className="w-full h-auto block"
+              onMouseEnter={(e) => {
+                void (e.currentTarget as HTMLVideoElement).play();
+              }}
+              onMouseLeave={(e) => {
+                const v = e.currentTarget as HTMLVideoElement;
+                v.pause();
+                v.currentTime = 0;
+                // Reset the element so the poster re-displays instead of
+                // the paused first frame.
+                v.load();
+              }}
+            >
+              <source src={`${BASE}/hero-demo.mp4`} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ============================================================
    SUB-HERO STATS STRIP
