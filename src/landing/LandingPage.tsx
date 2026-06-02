@@ -145,7 +145,7 @@ function Header() {
         <div className="mx-auto max-w-6xl px-5 pt-5 flex justify-between md:grid md:grid-cols-[1fr_auto_1fr] items-center gap-4">
           <a href="/" className="flex items-center gap-2 justify-self-start">
             <LogoMark />
-            <span className="text-[16px] font-semibold tracking-tight">SnagPost</span>
+            <span className="text-[16px] font-semibold tracking-tight">PostSnag</span>
           </a>
 
           <nav className="hidden md:flex justify-self-center items-center gap-0.5 rounded-full bg-white border border-[color:var(--line)] px-1.5 py-1.5 shadow-[0_2px_6px_rgba(16,24,48,0.04)]">
@@ -327,7 +327,7 @@ function Hero() {
               href="#install"
               className="inline-flex w-full sm:w-auto justify-center items-center gap-2 h-12 px-5 rounded-full bg-[color:var(--violet)] text-white font-medium text-[15px] hover:bg-[color:var(--violet-hover)] transition-colors"
             >
-              Try SnagPost Now, It&apos;s Free
+              Try PostSnag Now, It&apos;s Free
               <ArrowRight />
             </a>
           </div>
@@ -348,7 +348,7 @@ function Hero() {
               playsInline
               loop
               preload="metadata"
-              aria-label="SnagPost capturing a Facebook profile"
+              aria-label="PostSnag capturing a Facebook profile"
               className="w-full h-auto block"
               onMouseEnter={(e) => {
                 void (e.currentTarget as HTMLVideoElement).play();
@@ -651,7 +651,7 @@ function Features() {
               href="#install"
               className="inline-flex w-full sm:w-auto justify-center items-center gap-2 h-12 px-5 rounded-full bg-[color:var(--violet)] text-white font-medium text-[15px] hover:bg-[color:var(--violet-hover)] transition-colors"
             >
-              Try SnagPost Now
+              Try PostSnag Now
               <ArrowRight />
             </a>
           </div>
@@ -683,7 +683,7 @@ function HowItWorks() {
       img: `${BASE}/step-2.png`,
       doodle: `${BASE}/doodle-step-2.png`,
       title: "Open Facebook",
-      body: "Open Facebook — SnagPost sits quietly in your browser toolbar, always ready.",
+      body: "Open Facebook — PostSnag sits quietly in your browser toolbar, always ready.",
       doodleAt: "bottom" as const,
       doodleAlign: "justify-center",
     },
@@ -820,7 +820,7 @@ const allTestimonials = [
     image: "https://i.pravatar.cc/120?img=33",
   },
   {
-    text: "We were paying $179/mo for a tool that only gave us follower counts. SnagPost gives us actual post performance for free.",
+    text: "We were paying $179/mo for a tool that only gave us follower counts. PostSnag gives us actual post performance for free.",
     name: "Priya Iyer",
     role: "Growth lead, Auralis",
     image: "https://i.pravatar.cc/120?img=26",
@@ -838,7 +838,7 @@ const allTestimonials = [
     image: "https://i.pravatar.cc/120?img=19",
   },
   {
-    text: "I run a small agency. SnagPost replaced a junior analyst's first three days of every new client onboarding. Easily worth it.",
+    text: "I run a small agency. PostSnag replaced a junior analyst's first three days of every new client onboarding. Easily worth it.",
     name: "Lina Rosado",
     role: "Founder, Glydex Social",
     image: "https://i.pravatar.cc/120?img=8",
@@ -952,7 +952,7 @@ function FAQ() {
   const items = [
     {
       q: "Is this against Facebook's terms of service?",
-      a: "SnagPost runs in your browser using your own logged-in session. No API access, no proxies, no automated requests. It reads what's already on your screen as you scroll — the same data you'd see manually.",
+      a: "PostSnag runs in your browser using your own logged-in session. No API access, no proxies, no automated requests. It reads what's already on your screen as you scroll — the same data you'd see manually.",
     },
     {
       q: "Will my account get banned?",
@@ -968,7 +968,7 @@ function FAQ() {
     },
     {
       q: "How is this different from other tools?",
-      a: "Most Facebook research tools either need complex setups with proxies and aged accounts, or just give you follower counts. SnagPost captures actual post-level engagement using your existing session — it's faster, cheaper, and the only tool with a built-in outlier feed.",
+      a: "Most Facebook research tools either need complex setups with proxies and aged accounts, or just give you follower counts. PostSnag captures actual post-level engagement using your existing session — it's faster, cheaper, and the only tool with a built-in outlier feed.",
     },
     {
       q: "Can I get a refund?",
@@ -1002,7 +1002,7 @@ function FAQ() {
             <p className="mt-2 text-[13px] leading-6 text-neutral-600">
               Email a human. We answer within a business day.
             </p>
-            <a href="mailto:support@snagpost.com" className="btn-primary mt-4">
+            <a href="mailto:support@postsnag.com" className="btn-primary mt-4">
               Contact us
             </a>
           </aside>
@@ -1094,13 +1094,13 @@ function WhereItWorks() {
               Capture from any account type on Facebook.
             </h2>
             <p className="text-[14px] leading-6 text-neutral-500 mb-8 max-w-sm">
-              Personal profiles, business pages, groups, and creator accounts — if it's on Facebook, SnagPost captures it.
+              Personal profiles, business pages, groups, and creator accounts — if it's on Facebook, PostSnag captures it.
             </p>
             <a
               href="#install"
               className="inline-flex w-fit items-center gap-2 h-11 px-6 rounded-full bg-[color:var(--violet)] text-white font-medium text-[14px] hover:bg-[color:var(--violet-hover)] transition-colors mb-10"
             >
-              Try SnagPost now
+              Try PostSnag now
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 17L17 7M7 7h10v10" />
               </svg>
@@ -1304,7 +1304,7 @@ function Pricing() {
             price="$0"
             unit=""
             pitch="No card. No expiration."
-            cta="Try SnagPost Now"
+            cta="Try PostSnag Now"
             ctaStyle="ghost"
             features={free}
           />
@@ -1426,7 +1426,7 @@ function FounderNote() {
         >
           <img
             src={`${BASE}/Michael.jpeg`}
-            alt="Michael Sanchez, founder of SnagPost"
+            alt="Michael Sanchez, founder of PostSnag"
             className="w-full h-full object-cover"
           />
         </div>
@@ -1446,7 +1446,7 @@ function FounderNote() {
               year.
             </p>
             <p>
-              So we built it. SnagPost pulls the data Facebook hides, captures
+              So we built it. PostSnag pulls the data Facebook hides, captures
               everything our team needs to study what's actually working,
               and exports it cleanly to the tools you already use.
             </p>
@@ -1460,7 +1460,7 @@ function FounderNote() {
             <strong className="font-semibold">Michael Sanchez</strong>
             <span className="text-neutral-500">
               {" "}
-              · Founder, SnagPost &amp; TokScript
+              · Founder, PostSnag &amp; TokScript
             </span>
           </div>
         </div>
@@ -1518,7 +1518,7 @@ function CTABanner() {
                   href="#install"
                   className="inline-flex w-full sm:w-auto justify-center h-11 items-center gap-2 rounded-full bg-white text-neutral-900 px-5 text-[14px] font-medium hover:bg-neutral-100 transition-colors"
                 >
-                  Try SnagPost Now
+                  Try PostSnag Now
                 </a>
                 <a
                   href="#pricing"
@@ -1567,7 +1567,7 @@ function Footer() {
             <div className="flex items-center gap-2">
               <LogoMark />
               <span className="text-[15px] font-semibold tracking-tight text-white">
-                SnagPost
+                PostSnag
               </span>
             </div>
             <p className="mt-3 text-[13px] leading-6 text-white/60 max-w-[260px]">
@@ -1589,7 +1589,7 @@ function Footer() {
           />
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12px] text-white/45">
-          <span>© {new Date().getFullYear()} SnagPost by TokTools</span>
+          <span>© {new Date().getFullYear()} PostSnag by TokTools</span>
           <span>Not affiliated with or endorsed by Meta Platforms.</span>
         </div>
       </div>

@@ -122,7 +122,7 @@ export function AuthPage({ mode }: AuthPageProps) {
           </p>
         </div>
 
-        <p className="auth2-footer">2026 SnagPost, All rights reserved</p>
+        <p className="auth2-footer">2026 PostSnag, All rights reserved</p>
       </div>
 
       {/* ── Right panel ── */}
